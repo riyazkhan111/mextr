@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Extractor</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body and General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Form Container */
+        .form-container {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            animation: slideIn 1s ease-out;
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+            display: block;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(30px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Output Section */
+        .result-container {
+            margin-top: 30px;
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px;
+            background-color: #e7f7e7;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            animation: slideIn 1s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Email Extractor</h1>
+
+    <div class="form-container">
+        <form method="POST">
+            <label for="text_content">Enter Text Content:</label>
+            <textarea name="text_content" id="text_content" rows="10" placeholder="Enter your text here..." required></textarea>
+            <br>
+
+            <label for="domain">Enter Domain Name (e.g., domain.com):</label>
+            <input type="text" name="domain" id="domain" placeholder="Enter domain name" required>
+            <br>
+
+            <button type="submit">Extract Emails</button>
+        </form>
+    </div>
+
+    {% if filtered_emails is not none %}
+        <div class="result-container">
+            <h2>Filtered Emails ({{ filtered_emails | length }} found):</h2>
+            <ul>
+            {% for email in filtered_emails %}
+                <li>{{ email }}</li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    
+</body>
+</html>
